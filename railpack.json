@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.railpack.com",
+  "provider": "node",
+  "packages": {
+    "node": "20"
+  },
+  "steps": {
+    "install": {
+      "commands": ["npm install --legacy-peer-deps"]
+    },
+    "build": {
+      "inputs": [{ "step": "install" }],
+      "commands": ["...", "npm run build"]
+    }
+  },
+  "deploy": {
+    "startCommand": "node .next/standalone/server.js",
+    "variables": {
+      "NODE_ENV": "production",
+      "HOSTNAME": "0.0.0.0",
+      "PORT": "3000"
+    },
+    "inputs": [
+      { "step": "build", "include": [".next/standalone", ".next/static", "public"] }
+    ]
+  }
+}
