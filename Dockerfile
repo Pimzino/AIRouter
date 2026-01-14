@@ -73,4 +73,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
     CMD wget --no-verbose --tries=1 --spider http://localhost:${PORT}/api/health || exit 1
 
 # Start the application
-CMD ["node", "server.js"]
+# Explicitly pass HOSTNAME to ensure binding works in all environments
+CMD ["sh", "-c", "HOSTNAME=0.0.0.0 PORT=${PORT:-3000} node server.js"]

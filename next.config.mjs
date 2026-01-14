@@ -2,7 +2,7 @@
 const nextConfig = {
   output: "standalone",
   env: {
-    NEXT_PUBLIC_CLOUD_URL: "https://9router.com",
+    NEXT_PUBLIC_CLOUD_URL: "https://airouter.io",
   },
   webpack: (config, { isServer }) => {
     // Ignore fs/path modules in browser bundle
