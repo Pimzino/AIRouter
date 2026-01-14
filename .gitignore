@@ -56,6 +56,7 @@ RM.md
 cursor/*
 PUBLIC.md
 scripts/*
+!scripts/postbuild.js
 Thanks.md
 PUBLIC.en.md
 PR/*
