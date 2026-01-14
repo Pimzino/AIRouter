@@ -1,20 +1,18 @@
-# 🚀 9ROUTER - AI Proxy
+# 🚀 AIRouter - AI Proxy
 
 > Universal AI Proxy for Claude Code, Codex, Cursor | OpenAI, Claude, Gemini, Copilot
 
-🌐 **Website: [9router.com](https://9router.com)**
+🌐 **Website: [airouter.io](https://airouter.io)**
 
-[![npm version](https://img.shields.io/npm/v/9router.svg)](https://www.npmjs.com/package/9router)
-[![Downloads](https://img.shields.io/npm/dm/9router.svg)](https://www.npmjs.com/package/9router)
-[![License](https://img.shields.io/npm/l/9router.svg)](https://github.com/Pimzino/AIRouter/blob/master/LICENSE)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Pimzino/AIRouter/blob/master/LICENSE)
 
 A JavaScript port of CLIProxyAPI with web dashboard.
 
-![9Router Dashboard](./images/9router.png)
+![AIRouter Dashboard](./images/airouter.png)
 
 ## 📖 Introduction
 
-**9Router** is a powerful AI API proxy server that provides unified access to multiple AI providers through a single endpoint. It features automatic format translation, intelligent fallback routing, OAuth authentication, and a modern web dashboard for easy management.
+**AIRouter** is a powerful AI API proxy server that provides unified access to multiple AI providers through a single endpoint. It features automatic format translation, intelligent fallback routing, OAuth authentication, and a modern web dashboard for easy management.
 
 **Key Highlights:**
 - **JavaScript Port**: Converted from CLIProxyAPI (Go) to JavaScript/Node.js.
@@ -59,21 +57,21 @@ A JavaScript port of CLIProxyAPI with web dashboard.
 
 ```bash
 # Install globally
-npm install -g 9router
-9router
+npm install -g airouter
+airouter
 
 # Run directly with npx
-npx 9router
+npx airouter
 ```
 
 ## 🚀 Quick Start
 
 ```bash
-9router                    # Start server with default settings
-9router --port 8080        # Custom port
-9router --no-browser       # Don't open browser
-9router --skip-update      # Skip auto-update check
-9router --help             # Show help
+airouter                    # Start server with default settings
+airouter --port 8080        # Custom port
+airouter --no-browser       # Don't open browser
+airouter --skip-update      # Skip auto-update check
+airouter --help             # Show help
 ```
 
 **Dashboard**: `http://localhost:20128/dashboard`
@@ -98,16 +96,16 @@ docker-compose logs -f
 
 ```bash
 # Build the image
-docker build -t 9router .
+docker build -t airouter .
 
 # Run the container
 docker run -d \
-  --name 9router \
+  --name airouter \
   -p 3000:3000 \
   -e JWT_SECRET=your-secure-secret-here \
   -e NODE_ENV=production \
-  -v 9router-data:/app/data \
-  9router
+  -v airouter-data:/app/data \
+  airouter
 ```
 
 ### Docker Compose Configuration
@@ -115,7 +113,7 @@ docker run -d \
 ```yaml
 version: "3.8"
 services:
-  9router:
+  airouter:
     build: .
     ports:
       - "3000:3000"
@@ -124,11 +122,11 @@ services:
       - NODE_ENV=production
       - DATA_DIR=/app/data
     volumes:
-      - 9router-data:/app/data
+      - airouter-data:/app/data
     restart: unless-stopped
 
 volumes:
-  9router-data:
+  airouter-data:
 ```
 
 ## ☁️ VPS Deployment (Dokploy/Coolify)
@@ -160,11 +158,10 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
-| `JWT_SECRET` | Secret key for JWT token signing | `9router-default-secret-change-me` | **Yes (production)** |
+| `JWT_SECRET` | Secret key for JWT token signing | `airouter-default-secret-change-me` | **Yes (production)** |
 | `NODE_ENV` | Environment mode (`development`/`production`) | `development` | Recommended |
 | `PORT` | Server port | `3000` | No |
-| `DATA_DIR` | Directory for database storage | `~/.9router` | No (Docker: `/app/data`) |
-| `NEXT_PUBLIC_CLOUD_URL` | Cloud sync endpoint | `https://9router.com` | No |
+| `DATA_DIR` | Directory for database storage | `~/.airouter` | No (Docker: `/app/data`) |
 
 > **Security Note**: Always set a strong, unique `JWT_SECRET` in production. The default secret is insecure and should never be used in public deployments.
 
@@ -200,13 +197,13 @@ The following API endpoints require authentication:
 2. **Set JWT_SECRET**: Use a cryptographically secure random string (32+ characters)
 3. **Enable HTTPS**: Use a reverse proxy (nginx, Caddy, Traefik) or platform SSL (Dokploy, Coolify)
 4. **Firewall**: Restrict access to trusted IPs if possible
-5. **Regular Updates**: Keep 9Router updated for security patches
+5. **Regular Updates**: Keep AIRouter updated for security patches
 
 ## 💾 Data Location
 
 User data stored at:
-- **macOS/Linux**: `~/.9router/db.json`
-- **Windows**: `%APPDATA%/9router/db.json`
+- **macOS/Linux**: `~/.airouter/db.json`
+- **Windows**: `%APPDATA%/airouter/db.json`
 - **Docker**: `/app/data/db.json` (mount as volume for persistence)
 
 ## 🛠️ Development
@@ -235,7 +232,7 @@ npm start
 
 ### Project Structure
 ```
-9router/
+AIRouter/
 ├── src/
 │   ├── app/               # Next.js app (dashboard & API routes)
 │   ├── lib/               # Core libraries (DB, OAuth, rate limiting)
@@ -277,7 +274,7 @@ npm start
 
 Special thanks to:
 
-- **CLIProxyAPI**: The original Go implementation that inspired this project. 9Router is a JavaScript port with some features and web dashboard.
+- **CLIProxyAPI**: The original Go implementation that inspired this project. AIRouter is a JavaScript port with additional features and web dashboard.
 
 ## 📄 License
 

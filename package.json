@@ -1,7 +1,7 @@
 {
-  "name": "9router-app",
-  "version": "0.2.13",
-  "description": "9Router web dashboard",
+  "name": "airouter-app",
+  "version": "0.2.22",
+  "description": "AIRouter web dashboard",
   "private": true,
   "scripts": {
     "dev": "next dev",

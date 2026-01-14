@@ -7,7 +7,7 @@ import { loginRateLimiter } from "@/lib/rateLimit";
 import { getClientIp, getRateLimitKey } from "@/lib/getClientIp";
 
 const SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "9router-default-secret-change-me"
+  process.env.JWT_SECRET || "airouter-default-secret-change-me"
 );
 
 export async function POST(request) {

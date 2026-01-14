@@ -22,7 +22,7 @@ const parseToml = (content) => {
     const trimmed = line.trim();
     if (!trimmed || trimmed.startsWith("#")) return;
     
-    // Section header like [model_providers.9router]
+    // Section header like [model_providers.airouter]
     const sectionMatch = trimmed.match(/^\[(.+)\]$/);
     if (sectionMatch) {
       currentSection = sectionMatch[1];
@@ -95,10 +95,10 @@ const readConfig = async () => {
   }
 };
 
-// Check if config has 9Router settings
-const has9RouterConfig = (config) => {
+// Check if config has AIRouter settings
+const hasAIRouterConfig = (config) => {
   if (!config) return false;
-  return config.includes("model_provider = \"9router\"") || config.includes("[model_providers.9router]");
+  return config.includes("model_provider = \"airouter\"") || config.includes("[model_providers.airouter]");
 };
 
 // GET - Check codex CLI and read current settings
@@ -119,7 +119,7 @@ export async function GET() {
     return NextResponse.json({
       installed: true,
       config,
-      has9Router: has9RouterConfig(config),
+      hasAIRouter: hasAIRouterConfig(config),
       configPath: getCodexConfigPath(),
     });
   } catch (error) {
@@ -128,7 +128,7 @@ export async function GET() {
   }
 }
 
-// POST - Update 9Router settings (merge with existing config)
+// POST - Update AIRouter settings (merge with existing config)
 export async function POST(request) {
   try {
     const { baseUrl, apiKey, model } = await request.json();
@@ -150,13 +150,13 @@ export async function POST(request) {
       parsed = parseToml(existingConfig);
     } catch { /* No existing config */ }
 
-    // Update only 9Router related fields (api_key goes to auth.json, not config.toml)
+    // Update only AIRouter related fields (api_key goes to auth.json, not config.toml)
     parsed._root.model = model;
-    parsed._root.model_provider = "9router";
+    parsed._root.model_provider = "airouter";
     
-    // Update or create 9router provider section (no api_key - Codex reads from auth.json)
-    parsed._sections["model_providers.9router"] = {
-      name: "9Router",
+    // Update or create airouter provider section (no api_key - Codex reads from auth.json)
+    parsed._sections["model_providers.airouter"] = {
+      name: "AIRouter",
       base_url: `${baseUrl}/v1`,
       wire_api: "responses",
     };
@@ -187,7 +187,7 @@ export async function POST(request) {
   }
 }
 
-// DELETE - Remove 9Router settings only (keep other settings)
+// DELETE - Remove AIRouter settings only (keep other settings)
 export async function DELETE() {
   try {
     const configPath = getCodexConfigPath();
@@ -207,14 +207,14 @@ export async function DELETE() {
       throw error;
     }
 
-    // Remove 9Router related root fields only if they point to 9router
-    if (parsed._root.model_provider === "9router") {
+    // Remove AIRouter related root fields only if they point to airouter
+    if (parsed._root.model_provider === "airouter") {
       delete parsed._root.model;
       delete parsed._root.model_provider;
     }
     
-    // Remove 9router provider section
-    delete parsed._sections["model_providers.9router"];
+    // Remove airouter provider section
+    delete parsed._sections["model_providers.airouter"];
 
     // Write updated config
     const configContent = toToml(parsed);
@@ -237,7 +237,7 @@ export async function DELETE() {
 
     return NextResponse.json({
       success: true,
-      message: "9Router settings removed successfully",
+      message: "AIRouter settings removed successfully",
     });
   } catch (error) {
     console.log("Error resetting codex settings:", error);

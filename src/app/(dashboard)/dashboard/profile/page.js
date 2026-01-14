@@ -263,7 +263,7 @@ export default function ProfilePage() {
             <div className="flex items-center justify-between p-4 rounded-lg bg-bg border border-border">
               <div>
                 <p className="font-medium">Database Location</p>
-                <p className="text-sm text-text-muted font-mono">~/9router/data/db.json</p>
+                <p className="text-sm text-text-muted font-mono">~/.airouter/db.json</p>
               </div>
             </div>
           </div>

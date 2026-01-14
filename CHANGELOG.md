@@ -10,22 +10,19 @@
 
 ### Docker
 - Add multi-stage Dockerfile for optimized production builds (~150MB image)
-- Add docker-compose.yml for easy local testing and deployment
-- Add .dockerignore to exclude unnecessary files from build context
-- Add health check endpoint (`/api/health`) for container orchestration
+- Add docker-compose.yml for easy deployment
+- Add .dockerignore and health check endpoint
 - Add `DATA_DIR` environment variable support for Docker volume mounting
 
 ### Documentation
-- Update README with Docker deployment instructions
-- Add VPS deployment guide (Dokploy/Coolify)
-- Document environment variables
-- Add security best practices section
+- Update README with Docker/VPS deployment guides
+- Add security best practices and environment variables docs
+- Rebrand from 9Router to AIRouter
 
 ---
 
-# v0.2.21 (2026-01-12)
+## v0.2.21 (2026-01-12)
 
-## Changes
+### Changes
 - Update ReadMe
 - Fix bug **antigravity**
-
