@@ -16,11 +16,6 @@
   },
   "deploy": {
     "startCommand": "node .next/standalone/server.js",
-    "variables": {
-      "NODE_ENV": "production",
-      "HOSTNAME": "0.0.0.0",
-      "PORT": "3000"
-    },
     "inputs": [
       { "step": "build" }
     ]
