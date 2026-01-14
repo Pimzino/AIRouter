@@ -156,12 +156,19 @@ node -e "console.log(require('crypto').randomBytes(32).toString('base64'))"
 
 ## ⚙️ Environment Variables
 
+Copy `.env.example` to `.env` and customize for your deployment:
+
+```bash
+cp .env.example .env
+```
+
 | Variable | Description | Default | Required |
 |----------|-------------|---------|----------|
 | `JWT_SECRET` | Secret key for JWT token signing | `airouter-default-secret-change-me` | **Yes (production)** |
 | `NODE_ENV` | Environment mode (`development`/`production`) | `development` | Recommended |
 | `PORT` | Server port | `3000` | No |
 | `DATA_DIR` | Directory for database storage | `~/.airouter` | No (Docker: `/app/data`) |
+| `HOSTNAME` | Hostname binding | `localhost` | No (Docker: `0.0.0.0`) |
 
 > **Security Note**: Always set a strong, unique `JWT_SECRET` in production. The default secret is insecure and should never be used in public deployments.
 
