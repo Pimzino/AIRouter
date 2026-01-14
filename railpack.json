@@ -6,18 +6,22 @@
   },
   "steps": {
     "install": {
-      "inputs": ["."],
+      "inputs": [
+        { "local": true, "include": ["."] }
+      ],
       "commands": ["npm install --legacy-peer-deps"]
     },
     "build": {
-      "inputs": [{ "step": "install" }],
+      "inputs": [
+        { "step": "install" }
+      ],
       "commands": ["npm run build"]
     }
   },
   "deploy": {
-    "startCommand": "node .next/standalone/server.js",
     "inputs": [
-      { "step": "build" }
-    ]
+      { "step": "build", "include": [".next", "public", "package.json"] }
+    ],
+    "startCommand": "node .next/standalone/server.js"
   }
 }
