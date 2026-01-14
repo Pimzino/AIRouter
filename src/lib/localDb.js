@@ -16,6 +16,11 @@ function getAppName() {
 function getUserDataDir() {
   if (isCloud) return "/tmp"; // Fallback for Workers
 
+  // Docker/container support: use DATA_DIR env var if set
+  if (process.env.DATA_DIR) {
+    return process.env.DATA_DIR;
+  }
+
   const platform = process.platform;
   const homeDir = os.homedir();
   const appName = getAppName();

@@ -9,6 +9,7 @@ export default function LoginPage() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [hasPassword, setHasPassword] = useState(null);
+  const [remainingAttempts, setRemainingAttempts] = useState(null);
   const router = useRouter();
 
   // Check if password is set on mount
@@ -45,6 +46,7 @@ export default function LoginPage() {
     e.preventDefault();
     setLoading(true);
     setError("");
+    setRemainingAttempts(null);
 
     try {
       const res = await fetch("/api/auth/login", {
@@ -58,7 +60,21 @@ export default function LoginPage() {
         router.refresh();
       } else {
         const data = await res.json();
-        setError(data.error || "Invalid password");
+
+        if (res.status === 429) {
+          // Rate limited
+          const retryAfter = data.retryAfter || 900;
+          const minutes = Math.ceil(retryAfter / 60);
+          setError(
+            `Too many attempts. Please try again in ${minutes} minute${minutes > 1 ? "s" : ""}.`
+          );
+          setRemainingAttempts(0);
+        } else {
+          setError(data.error || "Invalid password");
+          if (data.remainingAttempts !== undefined) {
+            setRemainingAttempts(data.remainingAttempts);
+          }
+        }
       }
     } catch (err) {
       setError("An error occurred. Please try again.");
@@ -100,6 +116,11 @@ export default function LoginPage() {
                 autoFocus
               />
               {error && <p className="text-xs text-red-500">{error}</p>}
+              {remainingAttempts !== null && remainingAttempts > 0 && (
+                <p className="text-xs text-yellow-600">
+                  {remainingAttempts} attempt{remainingAttempts !== 1 ? "s" : ""} remaining
+                </p>
+              )}
             </div>
 
             <Button
@@ -107,6 +128,7 @@ export default function LoginPage() {
               variant="primary"
               className="w-full"
               isLoading={loading}
+              disabled={remainingAttempts === 0}
             >
               Login
             </Button>
