@@ -166,11 +166,16 @@ cp .env.example .env
 |----------|-------------|---------|----------|
 | `JWT_SECRET` | Secret key for JWT token signing | `airouter-default-secret-change-me` | **Yes (production)** |
 | `NODE_ENV` | Environment mode (`development`/`production`) | `development` | Recommended |
+| `HOSTNAME` | Hostname binding (use `0.0.0.0` for Docker) | `localhost` | **Yes (Docker)** |
 | `PORT` | Server port | `3000` | No |
 | `DATA_DIR` | Directory for database storage | `~/.airouter` | No (Docker: `/app/data`) |
-| `HOSTNAME` | Hostname binding | `localhost` | No (Docker: `0.0.0.0`) |
+| `API_KEY_SECRET` | Secret for API key generation | (internal default) | No |
+| `MACHINE_ID_SALT` | Salt for machine ID hashing | (internal default) | No |
+| `ENABLE_REQUEST_LOGS` | Enable request logging to `./logs` | `false` | No |
 
 > **Security Note**: Always set a strong, unique `JWT_SECRET` in production. The default secret is insecure and should never be used in public deployments.
+>
+> **Docker Note**: `HOSTNAME=0.0.0.0` is required for the app to be accessible from outside the container.
 
 ## 🔐 Security
 
