@@ -1,6 +1,6 @@
 {
   "name": "airouter-app",
-  "version": "0.2.22",
+  "version": "0.2.27",
   "description": "AIRouter web dashboard",
   "private": true,
   "scripts": {

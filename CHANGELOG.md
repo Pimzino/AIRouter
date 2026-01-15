@@ -1,5 +1,15 @@
 # Changelog
 
+## v0.2.27 (2026-01-15)
+
+### Features
+- Added Kiro Provider with generous free quota
+
+### Bug Fixes
+- Fixed Codex Provider bugs
+
+---
+
 ## v0.2.22 (2026-01-14)
 
 ### Security
